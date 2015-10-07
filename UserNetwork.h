@@ -3,7 +3,7 @@
 #include "User.h"
 
 
-class UserNetwork(){
+class UserNetwork{
 private:
 	DLinkedList<User*> users;
 

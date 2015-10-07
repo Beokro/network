@@ -1,14 +1,16 @@
 #include "DLinkList.h"
 
-
+template <class T>
 DLinkedList *DLinkedList::GetNext(){
 	return this->next;
 }
 
+template <class T>
 DLinkedList *DLinkedList::GetPrev(){
 	return this->prev;
 }
 
+template <class T>
 DLinkedList *DLinkedList::GetHead(){
 	DLinkedList * temp = this;
 	while(temp->prev!=NULL)
@@ -16,6 +18,7 @@ DLinkedList *DLinkedList::GetHead(){
 	return temp;
 }
 
+template <class T>
 void DLinkedList::SetNext(DLinkedList * n){
 	this->next = n;
 }
@@ -43,6 +46,7 @@ bool DLinkedList::RemoveElement(T element){
 	return false;
 }
 
+template <class T>
 DLinkedList::~DLinkedList(){
 	DLinkedList* temp = this->GetHead();
 	DLinkedList* temp2 = temp;

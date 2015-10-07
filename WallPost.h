@@ -3,7 +3,7 @@
 #include <string>
 using std::string;
 
-class WallPost(){
+class WallPost{
 
 private:
 	string contents;
@@ -14,7 +14,7 @@ public:
 	~WallPost();
 	void updateTime(string time);
 	void updateContents(string newContents);
-	void changeUserName(stirng newUserName);
+	void changeUserName(string newUserName);
 	string Print();
 }
 

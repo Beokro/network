@@ -7,7 +7,7 @@ void Wall::addPost(WallPost post){
 
 
 bool Wall::removePost(string author, string date, string contents){
-	for(WallPost post : this->posts){
+	for(WallPost post :posts){
 		if(post.userName == author && post.timePosted == data && post.contents == contents){
 			post.GetPrev().SetNext(post.GetNext());
 			delete post;

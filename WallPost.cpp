@@ -4,7 +4,6 @@ WallPost::WallPost(string contents, string timePosted, string userName, string p
 	this->contents = contents;
 	this->timePosted = timePosted;
 	this->userName = userName;
-	this->password = password;
 }
 
 WallPost::~WallPost(){
@@ -21,7 +20,7 @@ void WallPost::updateContents(string newContents){
 	this->contents = newContents;
 }
 
-void WallPost::changeUserName(stirng newUserName){
+void WallPost::changeUserName(string newUserName){
 	this->userName = newUserName;
 }
 

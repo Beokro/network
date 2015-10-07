@@ -2,7 +2,7 @@
 #define USER_H_
 #include "Wall.h"
 
-class User(){
+class User{
 private:
 	Wall *personalWall;
 	string userName;

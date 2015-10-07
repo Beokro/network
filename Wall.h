@@ -4,7 +4,7 @@
 #include "DLinkList.h"
 #include "WallPost.h"
 
-class Wall(){
+class Wall{
 private:
 	DLinkList<WallPost> *posts;
 	string user;

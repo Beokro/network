@@ -8,7 +8,7 @@ User::User(string information){
 User::User(string userName, string password, string birthday){
 	this->userName = userName;
 	this->password = password;
-	this->birthday = birthday;
+	this->bitrhday = birthday;
 	this->personalWall = new Wall(userName);
 }
 
