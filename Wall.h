@@ -6,11 +6,11 @@
 
 class Wall{
 private:
-	DLinkList<WallPost> *posts;
+	DLinkedList<WallPost> *posts;
 	string user;
 public:
-	DLinkList(string u) : user(u){};
-	~DLinkList();
+	DLinkedList(string u) : user(u){};
+	~Wall();
 	void addPost(WallPost post);
 	bool removePost(string author, string date, string contents);
 	string getUser();

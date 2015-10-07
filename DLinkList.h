@@ -12,10 +12,12 @@ private:
 public:
     DLinkedList(T d, DLinkedList *p, DLinkedList *n) : data(d), prev(p), next(n){}
     DLinkedList(T d) : data(d), prev(NULL), next(NULL){}
+	//need to fix the destructor and add a removeall method
 	~DLinkedList();
 	DLinkedList * GetNext();
 	DLinkedList * GetPrev();
 	DLinkedList * GetHead();
+	T GetData() {return data};
 	void SetNext(DLinkedList * n);
 	void AppendElement(T element);
 	bool RemoveElement(T element);

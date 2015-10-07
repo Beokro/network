@@ -1,18 +1,19 @@
 #include "Wall.h"
 
-
 void Wall::addPost(WallPost post){
 	this->posts->AppendElement(post);
 }
 
 
 bool Wall::removePost(string author, string date, string contents){
-	for(WallPost post :posts){
-		if(post.userName == author && post.timePosted == data && post.contents == contents){
-			post.GetPrev().SetNext(post.GetNext());
+	DLinkedList<WallPost> * post = posts;
+	while(post!=NULL){
+		if(post->GetData().GetUserName == author && post->GetData().GetTime() == date && post->GetData().GetContents() == contents){
+			post->GetPrev()->SetNext(post->GetNext());
 			delete post;
 			return true;
 		}
+		post = post->GetNext();
 	}
 	return false;
 }
@@ -32,9 +33,11 @@ string Wall::updateUser(string userName){
 
 string Wall::Print(){
 	string result="";
-	for(WallPost post : this->posts){
-		result+=post.Print();
+	DLinkedList<WallPost> * post = posts;
+	while(post!=NULL){
+		result+=post->GetData().Print();
 		result+="\n";
+		post = post->GetNext();
 	}
 	return result;
 }
@@ -44,7 +47,7 @@ bool Wall::ReadWall(string givenWall){
 	return true;
 }
 
-Wall::~DLinkList(){
+Wall::~Wall(){
 	delete posts;
 }
 

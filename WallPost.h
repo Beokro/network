@@ -15,6 +15,9 @@ public:
 	void updateTime(string time);
 	void updateContents(string newContents);
 	void changeUserName(string newUserName);
+	string GetUserName() {return userName;}
+	string GetTime() {return timePosted;}
+	string GetContents() {return contents;}
 	string Print();
 }
 

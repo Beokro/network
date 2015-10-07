@@ -7,7 +7,7 @@ private:
 	Wall *personalWall;
 	string userName;
 	string password;
-	string bitrhday;
+	string birthday;
 
 public:
 	User(string information);

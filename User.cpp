@@ -8,7 +8,7 @@ User::User(string information){
 User::User(string userName, string password, string birthday){
 	this->userName = userName;
 	this->password = password;
-	this->bitrhday = birthday;
+	this->birthday = birthday;
 	this->personalWall = new Wall(userName);
 }
 
@@ -23,27 +23,27 @@ void User::UpdateUser(string userName){
 }
 
 
-void UpdatePassword(string password){
+void User::UpdatePassword(string password){
 	this->password = password;
 }
 
 
-void UpdateBirthday(string birthday){
+void User::UpdateBirthday(string birthday){
 	this->birthday = birthday;
 }
 
 
-void AddPost(WallPost post){
+void User::AddPost(WallPost post){
 	personalWall->addPost(post);
 }
 
 
-bool RemovePost(string timePosted, string author, string& contents){
+bool User::RemovePost(string timePosted, string author, string& contents){
 	return this->personalWall->removePost(author,timePosted,contents);
 }
 
 
-string Print(){
+string User::Print(){
 	string result = "";
 	result+=("User: "+userName+"\n");
 	result+=("Birthday: "+birthday+"\n");
