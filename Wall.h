@@ -9,7 +9,7 @@ private:
 	DLinkedList<WallPost> *posts;
 	string user;
 public:
-	DLinkedList(string u) : user(u){};
+	Wall(string u) : user(u){};
 	~Wall();
 	void addPost(WallPost post);
 	bool removePost(string author, string date, string contents);

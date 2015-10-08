@@ -3,25 +3,35 @@
 
 using namespace std;
 
+template<class T>
+class Node{
+private:
+	Node* next;
+	Node* prev;
+	T data;
+public:
+	Node(T d, Node* p = NULL, Node * n = NULL) : data(d), prev(p), next(n){};
+	Node * GetNext() {return this->next;};
+	Node * GetPrev() {return this->prev;};
+	T GetData() {return data;};
+	void   SetNext(Node * n) {next = n;};
+};
+
+
 template <class T>
 class DLinkedList{
 private:
-	DLinkedList * prev;
-	DLinkedList * next;
-	T data;
+	Node<T> * head;
+	Node<T> * head;
 public:
-    DLinkedList(T d, DLinkedList *p, DLinkedList *n) : data(d), prev(p), next(n){}
-    DLinkedList(T d) : data(d), prev(NULL), next(NULL){}
+    DLinkedList(T d);
 	//need to fix the destructor and add a removeall method
 	~DLinkedList();
-	DLinkedList * GetNext();
-	DLinkedList * GetPrev();
-	DLinkedList * GetHead();
-	T GetData() {return data};
-	void SetNext(DLinkedList * n);
+	DLinkedList * GetHead() {return head};
 	void AppendElement(T element);
 	bool RemoveElement(T element);
 
 };
+
 
 #endif

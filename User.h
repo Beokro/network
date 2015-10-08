@@ -19,6 +19,7 @@ public:
 	void AddPost(WallPost post);
 	bool RemovePost(string timePosted, string author, string& contents);
 	string Print();
+	string GetUserName(){return userName;}
 
 }
 

@@ -5,7 +5,7 @@
 
 class UserNetwork{
 private:
-	DLinkedList<User*> users;
+	DLinkedList<User> *users;
 
 public:
 	UserNetwork(string userName, string password, string birthday);
