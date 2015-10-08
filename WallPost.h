@@ -4,13 +4,12 @@
 using std::string;
 
 class WallPost{
-
 private:
 	string contents;
 	string timePosted;
 	string userName;
 public:
-	WallPost(string contents, string timePosted, string userName, string password);
+	WallPost(string contents, string timePosted, string userName);
 	~WallPost();
 	void updateTime(string time);
 	void updateContents(string newContents);
@@ -19,6 +18,7 @@ public:
 	string GetTime() {return timePosted;}
 	string GetContents() {return contents;}
 	string Print();
-}
+	friend bool operator==(WallPost & lfs, WallPost & rhs);
+};
 
 #endif

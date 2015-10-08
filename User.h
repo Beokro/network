@@ -1,5 +1,6 @@
 #ifndef USER_H_
 #define USER_H_
+
 #include "Wall.h"
 
 class User{

@@ -11,9 +11,11 @@ UserNetwork::~UserNetwork(){
 
 
 bool UserNetwork::AddUser(string userName, string password, string birthday){
-	for(user : users){
-		if(user.GetUserName()==userName)
+	DLinkedList<User>* user = users->GetHead();
+	while(user!=NULL){
+		if(user->GetData().GetUserName()==userName)
 			return false;
+		user = user->GetNext();
 	}
 	this->users->AppendElement(User(userName, password, birthday));
 	return true;
@@ -21,9 +23,11 @@ bool UserNetwork::AddUser(string userName, string password, string birthday){
 
 
 bool UserNetwork::AddUser(User user){
-	for(User* u : users){
-		if(user->GetUserName()==u.GetUserName())
-			return false;
+	DLinkedList<User>* u = users->GetHead();
+		while(u != NULL){
+			if(u->GetData().GetUserName()==user.GetUserName())
+				return false;
+			u=u->GetNext();
 	}
 	this->users->AppendElement(user);
 	return true;
@@ -31,14 +35,16 @@ bool UserNetwork::AddUser(User user){
 
 
 bool UserNetwork::RemoveUser(string userName){
-	for(User* user : users){
-		if(user->GetUserName() == userName){
+	DLinkedList<User>* user = users->GetHead();
+	while(user!=NULL){
+		if(user->GetData().GetUserName() == userName){
 			if(user->GetPrev()!=NULL){
 				user->GetPrev()->SetNext(user->GetNext());
 			}
 			delete user;
 			return true;
 		}
+		user = user->GetNext();
 	}
 	return false;
 }

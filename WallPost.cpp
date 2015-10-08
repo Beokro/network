@@ -1,6 +1,6 @@
 #include "WallPost.h"
 
-WallPost::WallPost(string contents, string timePosted, string userName, string password){
+WallPost::WallPost(string contents, string timePosted, string userName){
 	this->contents = contents;
 	this->timePosted = timePosted;
 	this->userName = userName;
@@ -28,5 +28,6 @@ string WallPost::Print(){
 	string temp = "";
 	temp+=("Author: "+this->userName+"\n");
 	temp+=("Date: "+ this->timePosted+"\n");
-	temp+=("	"+this->contents);
+	temp+=("	"+this->contents+"\n");
+	return temp;
 }

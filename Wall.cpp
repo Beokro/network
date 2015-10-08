@@ -5,17 +5,8 @@ void Wall::addPost(WallPost post){
 }
 
 
-bool Wall::removePost(string author, string date, string contents){
-	DLinkedList<WallPost> * post = posts;
-	while(post!=NULL){
-		if(post->GetData().GetUserName == author && post->GetData().GetTime() == date && post->GetData().GetContents() == contents){
-			post->GetPrev()->SetNext(post->GetNext());
-			delete post;
-			return true;
-		}
-		post = post->GetNext();
-	}
-	return false;
+bool Wall::removePost(string author, string date, string &contents){
+	return posts->RemoveElement(WallPost(contents,date,author));
 }
 
 
@@ -25,7 +16,7 @@ string Wall::getUser(){
 
 
 
-string Wall::updateUser(string userName){
+void Wall::updateUser(string userName){
 	this->user =userName;
 }
 
@@ -33,7 +24,7 @@ string Wall::updateUser(string userName){
 
 string Wall::Print(){
 	string result="";
-	DLinkedList<WallPost> * post = posts;
+	Node<WallPost> * post = posts->GetHead();
 	while(post!=NULL){
 		result+=post->GetData().Print();
 		result+="\n";
@@ -51,9 +42,9 @@ Wall::~Wall(){
 	delete posts;
 }
 
-
-
-
-
-
+bool operator==(WallPost & lfs, WallPost & rhs) {
+	if (lfs.userName == rhs.userName && lfs.timePosted == rhs.timePosted && lfs.contents == rhs.contents)
+		return true;
+	return false;
+}
 
