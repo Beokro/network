@@ -13,6 +13,7 @@ private:
 public:
 	User(string information);
 	User(string userName, string password, string birthday);
+	User(const User& cuser);
 	~User();
 	void UpdateUser(string userName);
 	void UpdatePassword(string password);

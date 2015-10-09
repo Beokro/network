@@ -31,3 +31,7 @@ string WallPost::Print(){
 	temp+=("	"+this->contents+"\n");
 	return temp;
 }
+
+bool operator==(WallPost & lfs, WallPost & rhs) {
+	return(lfs.GetUserName() == rhs.GetUserName() && lfs.GetTime() == rhs.GetTime() && lfs.GetContents() == rhs.GetContents());
+}

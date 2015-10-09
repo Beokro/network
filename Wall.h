@@ -17,6 +17,7 @@ public:
 	void updateUser(string userName);
 	string Print();
 	bool ReadWall(string givenWall);
+	Wall operator= (const Wall& w);
 };
 
 

@@ -12,6 +12,13 @@ User::User(string userName, string password, string birthday){
 	this->personalWall = new Wall(userName);
 }
 
+User::User(const User& cuser) {
+	this->userName = cuser.userName;
+	this->birthday = cuser.birthday;
+	this->password = cuser.password;
+	this->personalWall = cuser.personalWall;
+}
+
 
 User::~User(){
 	std::cout << userName << std::endl;
@@ -42,6 +49,8 @@ void User::AddPost(WallPost post){
 bool User::RemovePost(string timePosted, string author, string& contents){
 	return this->personalWall->removePost(author,timePosted,contents);
 }
+
+
 
 
 string User::Print(){

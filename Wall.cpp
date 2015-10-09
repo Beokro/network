@@ -42,9 +42,12 @@ Wall::~Wall(){
 	delete posts;
 }
 
-bool operator==(WallPost & lfs, WallPost & rhs) {
-	if (lfs.userName == rhs.userName && lfs.timePosted == rhs.timePosted && lfs.contents == rhs.contents)
-		return true;
-	return false;
+Wall Wall::operator= (const Wall& w) {
+	posts = new DLinkedList<WallPost>();
+	Node<WallPost> *tempNode = w.posts->GetHead();
+	while (tempNode != NULL) {
+		this->addPost(tempNode->GetData());
+		tempNode = tempNode->GetNext();
+	}
+	return *this;
 }
-
