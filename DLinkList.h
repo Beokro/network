@@ -10,15 +10,13 @@ private:
 	Node<T>* prev;
 	T data;
 public:
-	Node(T d, Node<T>* p = NULL, Node<T> * n = NULL) : data(d), prev(p), next(n){};
+	Node(T d) : data(d), prev(NULL), next(NULL) {};
 	Node<T> * GetNext() {return this->next;};
 	Node<T> * GetPrev() {return this->prev;};
 	void   SetNext(Node * n) {this->next = n;}
 	void   SetPrev(Node * p) {this->prev = p;}
 	T GetData() {return data;};
 };
-
-
 
 
 
@@ -50,6 +48,7 @@ public:
 
 
 //function defination 
+
 template <class T>
 DLinkedList<T>::DLinkedList(T d){
 	this->head = new Node<T>(d);
@@ -65,8 +64,8 @@ DLinkedList<T>::DLinkedList() {
 template <class T>
 void DLinkedList<T>::AppendElement(T element){
 	if(head==NULL&&tail==NULL){
-		head = tail = new Node<T>(element);
-		//std::cout << "I ;ve been here" << std::endl;
+		tail = head = new Node<T>(element);
+		
 		return;
 	}
 	this->tail->SetNext(new Node<T>(element));
@@ -111,6 +110,8 @@ DLinkedList<T>::~DLinkedList(){
 	Node<T> *nNode = temp;
 	while(temp!=NULL){
 		nNode = temp->GetNext();
+		delete temp;
+		temp = nNode;
 	}
 }
 

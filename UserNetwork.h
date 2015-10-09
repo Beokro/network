@@ -8,13 +8,14 @@ private:
 	DLinkedList<User> *users;
 
 public:
-	UserNetwork(string userName, string password, string birthday);
-	~UserNetwork();
+	UserNetwork() : users(new DLinkedList<User>()) {}
+	~UserNetwork(); 
 	bool AddUser(string userName, string password, string birthday);
 	bool AddUser(User user);
 	bool RemoveUser(string userName);
 	void SaveInFile();
 	void ReadFromFile(string filename);
-}
+	string print() { return "hello"; }
+};
 
 #endif

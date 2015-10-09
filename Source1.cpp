@@ -1,7 +1,5 @@
 #include<iostream>
-#include "DLinkList.h"
-#include "WallPost.h"
-#include "Wall.h"
+#include "UserNetwork.h"
 using namespace std;
 
 int main(){
@@ -13,13 +11,22 @@ int main(){
 	
 	WallPost wp("hello","05/13/2015","Jack");
 	WallPost wp2("hello2", "05/13/2015", "Jackkk");
-	cout<<wp.Print();
+	cout<<wp.Print()<<endl<<endl;
 
-	Wall u("Jack");
-	u.addPost(wp);
-	u.addPost(wp2);
-	u.removePost(wp.GetUserName(),wp.GetTime(),wp.GetContents());
-	cout << u.Print() << endl;
-	cout << "I left" << endl;
+
+	User testUser("JJACK", "q503748283", "08/13/1996");
+	testUser.AddPost(wp);
+	testUser.AddPost(wp2);
+	cout<<testUser.Print();
+
+	
+	cout << "ht" << endl;
+	UserNetwork * testnetWork = new UserNetwork();
+	testnetWork->AddUser(testUser);
+	cout << "reach here";
+	//testnetWork->RemoveUser(testUser.GetUserName());
+	cout<<testnetWork->print();
+	cout << "reach here";
+	
 	return 0;
 }

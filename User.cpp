@@ -14,6 +14,7 @@ User::User(string userName, string password, string birthday){
 
 
 User::~User(){
+	std::cout << userName << std::endl;
 	delete personalWall;
 }
 
@@ -47,8 +48,9 @@ string User::Print(){
 	string result = "";
 	result+=("User: "+userName+"\n");
 	result+=("Birthday: "+birthday+"\n");
-	result+=("Password "+password+"\n");
+	result+=("Password "+password+"\n"+"\n");
 	result+=personalWall->Print();
+	return result;
 }
 
 

@@ -22,7 +22,7 @@ public:
 	string Print();
 	string GetUserName(){return userName;}
 
-}
+};
 
 
 

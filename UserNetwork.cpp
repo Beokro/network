@@ -1,9 +1,5 @@
 #include "UserNetwork.h"
 
-UserNetwork::UserNetwork(string userName, string password, string birthday){
-	this->users = new User(userName, password, birthday);
-}
-
 
 UserNetwork::~UserNetwork(){
 	delete users;
@@ -11,7 +7,7 @@ UserNetwork::~UserNetwork(){
 
 
 bool UserNetwork::AddUser(string userName, string password, string birthday){
-	DLinkedList<User>* user = users->GetHead();
+	Node<User>* user = users->GetHead();
 	while(user!=NULL){
 		if(user->GetData().GetUserName()==userName)
 			return false;
@@ -23,19 +19,21 @@ bool UserNetwork::AddUser(string userName, string password, string birthday){
 
 
 bool UserNetwork::AddUser(User user){
-	DLinkedList<User>* u = users->GetHead();
+	Node<User>* u = users->GetHead();
 		while(u != NULL){
 			if(u->GetData().GetUserName()==user.GetUserName())
 				return false;
 			u=u->GetNext();
 	}
+		std::cout << "Got here" << std::endl;
 	this->users->AppendElement(user);
+	std::cout << "passed here" << std::endl;
 	return true;
 }
 
 
 bool UserNetwork::RemoveUser(string userName){
-	DLinkedList<User>* user = users->GetHead();
+	Node<User>* user = users->GetHead();
 	while(user!=NULL){
 		if(user->GetData().GetUserName() == userName){
 			if(user->GetPrev()!=NULL){
@@ -52,7 +50,7 @@ bool UserNetwork::RemoveUser(string userName){
 
 
 void UserNetwork::SaveInFile(){
-
+	
 }
 
 void UserNetwork::ReadFromFile(string filename){
