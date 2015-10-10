@@ -25,20 +25,23 @@ bool UserNetwork::AddUser(User user){
 				return false;
 			u=u->GetNext();
 	}
-		std::cout << "Got here" << std::endl;
 	this->users->AppendElement(user);
-	std::cout << "passed here" << std::endl;
 	return true;
 }
 
 
 bool UserNetwork::RemoveUser(string userName){
+	std::cout << "I got into the remove function\n";
 	Node<User>* user = users->GetHead();
 	while(user!=NULL){
+		std::cout<<"In remove ths username is " << user->GetData().GetUserName() << std::endl;
 		if(user->GetData().GetUserName() == userName){
-			if(user->GetPrev()!=NULL){
+			if (user->GetPrev() != NULL) {
+				std::cout << "The prev is not NULL\n";
 				user->GetPrev()->SetNext(user->GetNext());
 			}
+			else
+				users->SetHead(user->GetNext());
 			delete user;
 			return true;
 		}
@@ -47,7 +50,16 @@ bool UserNetwork::RemoveUser(string userName){
 	return false;
 }
 
-
+int UserNetwork::NumberOfUser() {
+	if (users == NULL)return 0;
+	Node<User>* u = users->GetHead();
+	int count = 0;
+	while (u != NULL) {
+		count++;
+		u = u->GetNext();
+	}
+	return count;
+}
 
 void UserNetwork::SaveInFile(){
 	

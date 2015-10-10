@@ -16,12 +16,12 @@ User::User(const User& cuser) {
 	this->userName = cuser.userName;
 	this->birthday = cuser.birthday;
 	this->password = cuser.password;
-	this->personalWall = cuser.personalWall;
+	this->personalWall = new Wall(userName,cuser.personalWall->GetPosts());
 }
 
 
 User::~User(){
-	std::cout << userName << std::endl;
+	//std::cout<<"Delte from User" << userName << std::endl;
 	delete personalWall;
 }
 

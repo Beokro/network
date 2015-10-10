@@ -16,6 +16,7 @@ public:
 	void SaveInFile();
 	void ReadFromFile(string filename);
 	string print() { return "hello"; }
+	int NumberOfUser();
 };
 
 #endif

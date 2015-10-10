@@ -10,6 +10,7 @@ private:
 	string user;
 public:
 	Wall(string u) : user(u), posts(new DLinkedList<WallPost>()) {}
+	Wall(string u, DLinkedList<WallPost> *p) : user(u), posts(new DLinkedList<WallPost>(*p)) {}
 	~Wall();
 	void addPost(WallPost post);
 	bool removePost(string author, string date, string &contents);
@@ -18,6 +19,7 @@ public:
 	string Print();
 	bool ReadWall(string givenWall);
 	Wall operator= (const Wall& w);
+	DLinkedList<WallPost> * GetPosts() { return posts; }
 };
 
 

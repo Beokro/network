@@ -28,10 +28,12 @@ private:
 public:
 	DLinkedList();
     DLinkedList(T d);
+	DLinkedList( const DLinkedList<T> &d);
 	~DLinkedList();
-	Node<T> * GetHead() {return head;};
+	Node<T> * GetHead() const {return head;};
 	void AppendElement(T element);
 	bool RemoveElement(T element);
+	void SetHead(Node<T> *newhead) { head = newhead; }
 
 };
 
@@ -58,6 +60,15 @@ DLinkedList<T>::DLinkedList(T d){
 template <class T>
 DLinkedList<T>::DLinkedList() {
 	this->head = this->tail = NULL;
+}
+
+template <class T>
+DLinkedList<T>::DLinkedList(const DLinkedList<T>& d) {
+	Node<T> *temp = d.GetHead();
+	while (temp != NULL) {
+		this->AppendElement(temp->GetData());
+		temp = temp->GetNext();
+	}
 }
 
 

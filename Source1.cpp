@@ -18,13 +18,16 @@ int main(){
 	testUser.AddPost(wp);
 	testUser.AddPost(wp2);
 	cout<<testUser.Print();
-
+	User testUser2("JJACK2", "q503748283", "08/13/1996");
 	
 	cout << "ht" << endl;
 	UserNetwork * testnetWork = new UserNetwork();
-	testnetWork->AddUser(testUser);
-	cout << "reach here";
-	//testnetWork->RemoveUser(testUser.GetUserName());
+	if(testnetWork->AddUser(testUser)) cout<<"Add Success\n";
+	testnetWork->AddUser(testUser2);
+	cout << "After add, there are "<<testnetWork->NumberOfUser() << endl;
+	if(testnetWork->RemoveUser(testUser.GetUserName())) cout<<"remove success\n";
+	else cout << "remove failed\n";
+	cout << "After remove, there are " << testnetWork->NumberOfUser() << endl;
 	cout<<testnetWork->print();
 	cout << "reach here";
 	
