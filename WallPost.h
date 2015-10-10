@@ -3,6 +3,8 @@
 #include <string>
 using std::string;
 
+
+
 class WallPost{
 private:
 	string contents;
@@ -20,5 +22,7 @@ public:
 	string Print();
 	friend bool operator==(WallPost & lfs, WallPost & rhs);
 };
+
+
 
 #endif

@@ -1,5 +1,34 @@
 #include "WallPost.h"
 
+string formating(string origin, int number) {
+	int count = 0, index = 0, size = origin.size();
+	string formatted = "";
+	while (index < size) {
+		if (count < (number - 1)) {
+			formatted += origin[index];
+			count++;
+			index++;
+		}
+		else {
+			if (origin[index - 1] != ' '&&origin[index] != ' '&&index < (size - 1) && origin[index + 1] != ' ') {
+				formatted += "-";
+			}
+			else if (origin[index - 1] != ' '&&origin[index] == ' ') {
+				formatted += " ";
+			}
+			else {
+				formatted += origin[index++];
+			}
+			formatted += "\n";
+			count = 0;
+		}
+
+	}
+	return formatted;
+}
+
+
+
 WallPost::WallPost(string contents, string timePosted, string userName){
 	this->contents = contents;
 	this->timePosted = timePosted;
@@ -28,7 +57,7 @@ string WallPost::Print(){
 	string temp = "";
 	temp+=("Author: "+this->userName+"\n");
 	temp+=("Date: "+ this->timePosted+"\n");
-	temp+=("	"+this->contents+"\n");
+	temp+=(formating(contents,30)+"\n");
 	return temp;
 }
 

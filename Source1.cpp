@@ -2,15 +2,18 @@
 #include "UserNetwork.h"
 using namespace std;
 
+
 int main(){
 	DLinkedList<int> *test = new DLinkedList<int>(5);
 	Node<int> * temp = new Node<int>(5);
 	test->AppendElement(6);
 	test->RemoveElement(5);
 	cout<<test->GetHead()->GetData()<<endl;
+
+	string longstring = "i am not saying you are stupid, it will be a long string, but I really don;t know hat can I write here, so you know";
 	
-	WallPost wp("hello","05/13/2015","Jack");
-	WallPost wp2("hello2", "05/13/2015", "Jackkk");
+	WallPost wp(longstring,"05/13/2015","Jack");
+	WallPost wp2(longstring, "05/13/2015", "Jackkk");
 	cout<<wp.Print()<<endl<<endl;
 
 
@@ -22,7 +25,7 @@ int main(){
 	
 	cout << "ht" << endl;
 	UserNetwork * testnetWork = new UserNetwork();
-	if(testnetWork->AddUser(testUser)) cout<<"Add Success\n";
+	testnetWork->AddUser(testUser);
 	testnetWork->AddUser(testUser2);
 	cout << "After add, there are "<<testnetWork->NumberOfUser() << endl;
 	if(testnetWork->RemoveUser(testUser.GetUserName())) cout<<"remove success\n";
@@ -30,6 +33,5 @@ int main(){
 	cout << "After remove, there are " << testnetWork->NumberOfUser() << endl;
 	cout<<testnetWork->print();
 	cout << "reach here";
-	
 	return 0;
 }
