@@ -1,7 +1,8 @@
 #ifndef USERNETWORK_H_
 #define USERNETWORK_H_
 #include "User.h"
-
+#include <iostream>
+#include <fstream>
 
 class UserNetwork{
 private:
@@ -13,9 +14,9 @@ public:
 	bool AddUser(string userName, string password, string birthday);
 	bool AddUser(User user);
 	bool RemoveUser(string userName);
-	void SaveInFile();
+	void SaveInFile(string fileName);
 	void ReadFromFile(string filename);
-	string print() { return "hello"; }
+	string print();
 	int NumberOfUser();
 };
 

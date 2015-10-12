@@ -5,6 +5,11 @@ string formating(string origin, int number) {
 	string formatted = "";
 	while (index < size) {
 		if (count < (number - 1)) {
+			if (count == 0 && origin[index] == ' ') {
+				index++;
+				continue;
+			}
+				
 			formatted += origin[index];
 			count++;
 			index++;
@@ -57,7 +62,7 @@ string WallPost::Print(){
 	string temp = "";
 	temp+=("Author: "+this->userName+"\n");
 	temp+=("Date: "+ this->timePosted+"\n");
-	temp+=(formating(contents,30)+"\n");
+	temp+=(formating(contents,40)+"\n");
 	return temp;
 }
 

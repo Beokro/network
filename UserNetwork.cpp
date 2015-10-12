@@ -61,13 +61,91 @@ int UserNetwork::NumberOfUser() {
 	return count;
 }
 
-void UserNetwork::SaveInFile(){
-	
+string UserNetwork::print() {
+	Node<User> *temp = users->GetHead();
+	string result = "";
+	while (temp != NULL) {
+		result += temp->GetData().Print();
+		result += "\n";
+		temp = temp->GetNext();
+	}
+	return result;
 }
+
+void UserNetwork::SaveInFile(string fileName){
+	std::ofstream myfile(fileName);
+	myfile << print();
+	myfile.close();
+}
+
+string GetNextWord(string &contents, int &index) {
+	int size = contents.size();
+	if (index >= size) return "";
+	string temp = "";
+	while ((contents[index] == ' ' || contents[index] == '\n') && index < (size - 1))
+		index++;
+	for (index; index < size; index++) {
+		if (contents[index] != ' '&& contents[index] != '\n')
+			temp += contents[index];
+		else break;
+	}
+	return temp;
+}
+
+
 
 void UserNetwork::ReadFromFile(string filename){
+	std::ifstream myfile(filename);
+	string input ="";
+	string temp = "";
+	if (myfile.is_open()) {
+		while (!myfile.eof()) {
+			getline(myfile,temp);
+			input += temp;
+			input += "\n";
+		}
+	}
+	if (input == "")
+		return;
+
+	int size = input.size();
+
+	string userName = "";
+	string birthday = "";
+	string password = "";
+
+	string author;
+	string date;
+	string contents;
+
+	User  * u = new User("stub", "stub", "stub");
+
+	input = " " + input;
+	for (int i = 0; i < size; i++) {
+		if (GetNextWord(input, i) == "User:") {
+			userName = GetNextWord(input, i);
+			GetNextWord(input, i);
+			birthday = GetNextWord(input, i);
+			GetNextWord(input, i);
+			password = GetNextWord(input, i);
+			GetNextWord(input, i);
+			author = GetNextWord(input, i);
+
+			
+		}
+		else if (GetNextWord(input, i) == "Author") {
+			author = GetNextWord(input, i);
+			GetNextWord(input, i);
+			date = GetNextWord(input, i);
+			GetNextWord(input, i);
+			password = GetNextWord(input, i);
+		}
+	}
+	std::cout<<"username is "<< author << std::endl;
+
 
 }
+
 
 
 
