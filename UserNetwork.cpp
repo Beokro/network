@@ -97,7 +97,7 @@ string GetNextWord(string &contents, int &index) {
 	string temp = "";
 	while ((contents[index] == ' ' || contents[index] == '\n') && index < (size - 1))
 		index++;
-	for (index; index < size; index++) {
+	for (; index < size; index++) {
 		if (contents[index] != ' '&& contents[index] != '\n')
 			temp += contents[index];
 		else break;
@@ -111,7 +111,7 @@ string GetParagraph(string & contents, int &index) {
 	string temp = "";
 	while ((contents[index] == '\n'|| contents[index] == ' ') && index < (size - 1))
 		index++;
-	for (index; index < size; index++) {
+	for (; index < size; index++) {
 		if (contents[index] == '\n') {
 			if (++index < size) {
 				if (contents[index] == '\n')

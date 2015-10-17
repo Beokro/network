@@ -10,7 +10,7 @@ private:
 	Node<T>* prev;
 	T *data;
 public:
-	Node(T d) : data(new T(d)), prev(NULL), next(NULL) {};
+	Node(T d) : data(new T(d)), next(NULL), prev(NULL) {};
 	Node<T> * GetNext() {return this->next;};
 	Node<T> * GetPrev() {return this->prev;};
 	void   SetNext(Node * n) {this->next = n;}
@@ -120,6 +120,7 @@ DLinkedList<T>::~DLinkedList(){
 	Node<T> *temp =this->head;
 	Node<T> *nNode = temp;
 	while(temp!=NULL){
+	  delete temp->GetData();
 		nNode = temp->GetNext();
 		delete temp;
 		temp = nNode;

@@ -15,9 +15,10 @@ int main(){
 	string userName = "", password = "", birthsday = "";
 	string author = "", time = "", contents = "";
 	User * currentUser = NULL;
-	netWork->ReadFromFile("NetworkData.txt");
+	cout<<"everthing before save is fine";
+	//netWork->ReadFromFile("NetworkData.txt");
 
-	cout<<netWork->print(); 
+	//cout<<netWork->print(); 
 
 	menu:
 	cout << "To create a user, Enter C. To log in, Enter L. To quit, enter q\n";
