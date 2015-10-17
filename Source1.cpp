@@ -1,52 +1,102 @@
 #include<iostream>
 #include "UserNetwork.h"
-using namespace std;
+
+using std::cin;
+using std::cout;
+using std::endl;
 
 
 int main(){
-	DLinkedList<int> *test = new DLinkedList<int>(5);
-	Node<int> * temp = new Node<int>(5);
-	test->AppendElement(6);
-	test->RemoveElement(5);
-	//cout<<test->GetHead()->GetData()<<endl;
 
-	string longstring = "i am not saying you are stupid, it will be a long string, but I really don;t know hat can I write here, so you know";
+
 	
-	WallPost wp(longstring,"05/13/2015","Jack");
-	WallPost wp2(longstring, "05/13/2015", "Jackkk");
-	//cout<<wp.Print()<<endl<<endl;
+	UserNetwork * netWork = new UserNetwork();
+	string command="";
+	string userName = "", password = "", birthsday = "";
+	User * currentUser = NULL;
+	netWork->ReadFromFile("NetworkData.txt");
+
+	cout<<netWork->print(); 
+
+	menu:
+	cout << "To create a user, Enter C. To log in, Enter L. To quit, enter q\n";
+	cin >> command;
+	if (command == "C" || command == "c") {
+		cout << "Please Choose your UserName\n";
+		cin >> userName;
+		while (netWork->CheckUserName(userName)) {
+			cout << "UserName has exist, please enter antother one, enter q to quit\n";
+			cin >> userName;
+			if (userName == "q" || userName == "Q")
+				goto exit;
+		}
+		cout << "Please Enter your Password\n";
+		cin >> password;
+		cout << "Please Enter your date of Birth in follwing format mm/dd/yyyy\n";
+		cin >> birthsday;
+
+		while (birthsday.length() != 10 || birthsday[2] != '/' || birthsday[5] != '/' || !isdigit(birthsday[0]) || !isdigit(birthsday[1])
+			|| !isdigit(birthsday[3]) || !isdigit(birthsday[4]) || !isdigit(birthsday[6]) || !isdigit(birthsday[7]) || !isdigit(birthsday[8])
+			|| !isdigit(birthsday[9])) {
+			cout << "birthday format is wrong, it should be mm/dd/yyyy. Please Enter Again. (Enter Q to quit): \n";
+			cin >> birthsday;
+		}
+
+		netWork->AddUser(User(userName, password, birthsday));
+		cout << "You have succesefully create your account\n";
+
+		cout<<netWork->print();
+		goto menu;
+
+	}
+
+	else if (command == "L" || command == "l") {
+		cout << "Enter your UserName:\n";
+		cin >> userName;
+		while (!netWork->CheckUserName(userName)) {
+			cout << "UserName is not valid, Please try again.(Enter Q to Exit)\n";
+			cin >> userName;
+			if ( userName == "Q" || userName == "q")
+				goto exit;
+		}
+		cout << "Enter your password:\n";
+		cin >> password;
+
+		currentUser = netWork->GetUser(userName, password);
+
+		if (currentUser == NULL) cout << "incorrect" << endl;
+
+		while (currentUser == NULL) {
+			cout << "Password is not correct. Please try again. (Enter Q to Exit, B to beck to MainMenu: )";
+			cin >> password;
+			if (toupper(password[0]) == 'q' )
+				goto exit;
+			if (toupper(password[0]) == 'B')
+				goto menu;
+			currentUser = netWork->GetUser(userName, password);
+		}
+
+		cout << "Current user is " << currentUser->GetUserName() << endl;
+
+		currentMenu:
+		cout << "To display your Wall, Enter D. Enter Q to quit\n";
+		cin >> command;
+		while (toupper(command[0]) == 'D'&& toupper(command[0]) == 'Q') {
+			cout << "Command invalid. Please try again:\n";
+			cin >> command;
+		}
+		
+		if (toupper(command[0]) == 'D') {
+			cout << currentUser->Print();
+			goto currentMenu;
+		}
+		if (toupper(command[0]) == 'Q')
+			goto exit;
+	}
+
+	exit:
 
 
-	User testUser("JJACK", "q503748283", "08/13/1996");
-	testUser.AddPost(wp);
-	testUser.AddPost(wp2);
-	//cout<<testUser.Print();
-	User testUser2("JJACK2", "q503748283", "08/13/1996");
-	
-	cout << "ht" << endl;
-	UserNetwork * testnetWork = new UserNetwork();
-	testnetWork->AddUser(testUser);
-	testnetWork->AddUser(testUser2);
-
-	testnetWork->SaveInFile("NetworkData.txt");
-
-	cout << testnetWork->print() << endl;
-
-	testnetWork->ReadFromFile("NetworkData.txt");
-
-
-	/*cout << "After add, there are "<<testnetWork->NumberOfUser() << endl;
-	if(testnetWork->RemoveUser(testUser.GetUserName())) cout<<"remove success\n";
-	else cout << "remove failed\n";
-	cout << "After remove, there are " << testnetWork->NumberOfUser() << endl;
-	cout<<testnetWork->print();
-	cout << "reach here";
-
-	fstream myfile;
-	myfile.open("NetworkData.txt");
-	myfile << "hi";
-	myfile.write("hhhh",5);
-	myfile.close();*/
 	return 0;
 }
 

@@ -22,6 +22,7 @@ public:
 	bool RemovePost(string timePosted, string author, string& contents);
 	string Print();
 	string GetUserName(){return userName;}
+	bool CheckPassword(string pass) { return pass == password; }
 
 };
 

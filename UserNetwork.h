@@ -14,6 +14,8 @@ public:
 	bool AddUser(string userName, string password, string birthday);
 	bool AddUser(User user);
 	bool RemoveUser(string userName);
+	bool CheckUserName(string userName);
+	User* GetUser(string userName, string password);
 	void SaveInFile(string fileName);
 	void ReadFromFile(string filename);
 	string print();

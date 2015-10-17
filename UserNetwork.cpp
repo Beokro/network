@@ -17,27 +17,29 @@ bool UserNetwork::AddUser(string userName, string password, string birthday){
 	return true;
 }
 
+bool UserNetwork::CheckUserName(string userName) {
+	Node<User>* u = users->GetHead();
+	while (u != NULL) {
+		if (u->GetData().GetUserName() == userName)
+			return true;
+		u = u->GetNext();
+	}
+	return false;
+}
 
 bool UserNetwork::AddUser(User user){
-	Node<User>* u = users->GetHead();
-		while(u != NULL){
-			if(u->GetData().GetUserName()==user.GetUserName())
-				return false;
-			u=u->GetNext();
-	}
+	if (CheckUserName(user.GetUserName()))
+		return false;
 	this->users->AppendElement(user);
 	return true;
 }
 
 
 bool UserNetwork::RemoveUser(string userName){
-	std::cout << "I got into the remove function\n";
 	Node<User>* user = users->GetHead();
 	while(user!=NULL){
-		std::cout<<"In remove ths username is " << user->GetData().GetUserName() << std::endl;
 		if(user->GetData().GetUserName() == userName){
 			if (user->GetPrev() != NULL) {
-				std::cout << "The prev is not NULL\n";
 				user->GetPrev()->SetNext(user->GetNext());
 			}
 			else
@@ -48,6 +50,17 @@ bool UserNetwork::RemoveUser(string userName){
 		user = user->GetNext();
 	}
 	return false;
+}
+
+
+User* UserNetwork::GetUser(string userName, string password) {
+	Node<User>* u = users->GetHead();
+	while (u != NULL) {
+		if (u->GetData().GetUserName() == userName && u->GetData().CheckPassword(password))
+			return &u->GetData();
+		u = u->GetNext();
+	}
+	return NULL;
 }
 
 int UserNetwork::NumberOfUser() {
@@ -92,6 +105,37 @@ string GetNextWord(string &contents, int &index) {
 	return temp;
 }
 
+string GetParagraph(string & contents, int &index) {
+	int size = contents.size();
+	if (index >= size) return "";
+	string temp = "";
+	while ((contents[index] == '\n'|| contents[index] == ' ') && index < (size - 1))
+		index++;
+	for (index; index < size; index++) {
+		if (contents[index] == '\n') {
+			if (++index < size) {
+				if (contents[index] == '\n')
+					break;
+				else if (contents[index - 2] != ' '&&contents[index] != ' ')
+					temp += ' ';
+			}
+			else break;
+
+		}
+		if (contents[index] != ' ') {
+			if (contents[index] == '-'&&(index+1)<size&&contents[index + 1] == '\n')
+				continue;
+			temp += contents[index];
+		}
+
+		else temp += ' ';
+		
+	}
+
+	return temp;
+
+}
+
 
 
 void UserNetwork::ReadFromFile(string filename){
@@ -118,33 +162,47 @@ void UserNetwork::ReadFromFile(string filename){
 	string date;
 	string contents;
 
+	string holder = "";
+
 	User  * u = new User("stub", "stub", "stub");
 
 	input = " " + input;
 	for (int i = 0; i < size; i++) {
-		if (GetNextWord(input, i) == "User:") {
+		//std::cout << "index =" <<i<<std::endl;
+		holder = GetNextWord(input, i);
+		if (holder == "User:") {
+			//std::cout << "I get in here" << std::endl;
 			userName = GetNextWord(input, i);
 			GetNextWord(input, i);
 			birthday = GetNextWord(input, i);
 			GetNextWord(input, i);
 			password = GetNextWord(input, i);
-			GetNextWord(input, i);
-			author = GetNextWord(input, i);
-
+			if (u->GetUserName()!= "stub") {
+				AddUser(*u);
+			}
+				delete u;
+				u = new User(userName, password, birthday);
 			
 		}
-		else if (GetNextWord(input, i) == "Author") {
+		else if (holder == "Author:") {
+			//std::cout << "I get in author" << std::endl;
 			author = GetNextWord(input, i);
 			GetNextWord(input, i);
 			date = GetNextWord(input, i);
-			GetNextWord(input, i);
-			password = GetNextWord(input, i);
+			contents = GetParagraph(input, i);
+
+			//std::cout << "author is" <<author<< std::endl;
+			u->AddPost(WallPost(contents, date, author));
+
 		}
 	}
-	std::cout<<"username is "<< author << std::endl;
+	if (u->GetUserName() != "stub") {
+		AddUser(*u);
+	}
 
 
 }
+
 
 
 
