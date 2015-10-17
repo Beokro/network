@@ -26,7 +26,7 @@ string Wall::Print(){
 	string result="";
 	Node<WallPost> * post = posts->GetHead();
 	while(post!=NULL){
-		result+=post->GetData().Print();
+		result+=post->GetData()->Print();
 		result+="\n";
 		post = post->GetNext();
 	}
@@ -46,7 +46,7 @@ Wall Wall::operator= (const Wall& w) {
 	posts = new DLinkedList<WallPost>();
 	Node<WallPost> *tempNode = w.posts->GetHead();
 	while (tempNode != NULL) {
-		this->addPost(tempNode->GetData());
+		this->addPost(*tempNode->GetData());
 		tempNode = tempNode->GetNext();
 	}
 	return *this;

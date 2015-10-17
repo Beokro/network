@@ -9,7 +9,7 @@ UserNetwork::~UserNetwork(){
 bool UserNetwork::AddUser(string userName, string password, string birthday){
 	Node<User>* user = users->GetHead();
 	while(user!=NULL){
-		if(user->GetData().GetUserName()==userName)
+		if(user->GetData()->GetUserName()==userName)
 			return false;
 		user = user->GetNext();
 	}
@@ -20,7 +20,7 @@ bool UserNetwork::AddUser(string userName, string password, string birthday){
 bool UserNetwork::CheckUserName(string userName) {
 	Node<User>* u = users->GetHead();
 	while (u != NULL) {
-		if (u->GetData().GetUserName() == userName)
+		if (u->GetData()->GetUserName() == userName)
 			return true;
 		u = u->GetNext();
 	}
@@ -38,7 +38,7 @@ bool UserNetwork::AddUser(User user){
 bool UserNetwork::RemoveUser(string userName){
 	Node<User>* user = users->GetHead();
 	while(user!=NULL){
-		if(user->GetData().GetUserName() == userName){
+		if(user->GetData()->GetUserName() == userName){
 			if (user->GetPrev() != NULL) {
 				user->GetPrev()->SetNext(user->GetNext());
 			}
@@ -56,8 +56,8 @@ bool UserNetwork::RemoveUser(string userName){
 User* UserNetwork::GetUser(string userName, string password) {
 	Node<User>* u = users->GetHead();
 	while (u != NULL) {
-		if (u->GetData().GetUserName() == userName && u->GetData().CheckPassword(password))
-			return &u->GetData();
+		if (u->GetData()->GetUserName() == userName && u->GetData()->CheckPassword(password))
+			return u->GetData();
 		u = u->GetNext();
 	}
 	return NULL;
@@ -78,7 +78,7 @@ string UserNetwork::print() {
 	Node<User> *temp = users->GetHead();
 	string result = "";
 	while (temp != NULL) {
-		result += temp->GetData().Print();
+		result += temp->GetData()->Print();
 		result += "\n";
 		temp = temp->GetNext();
 	}

@@ -8,14 +8,14 @@ class Node{
 private:
 	Node<T>* next;
 	Node<T>* prev;
-	T data;
+	T *data;
 public:
-	Node(T d) : data(d), prev(NULL), next(NULL) {};
+	Node(T d) : data(new T(d)), prev(NULL), next(NULL) {};
 	Node<T> * GetNext() {return this->next;};
 	Node<T> * GetPrev() {return this->prev;};
 	void   SetNext(Node * n) {this->next = n;}
 	void   SetPrev(Node * p) {this->prev = p;}
-	T GetData() {return data;};
+	T * GetData() {return data;};
 };
 
 
@@ -66,7 +66,7 @@ template <class T>
 DLinkedList<T>::DLinkedList(const DLinkedList<T>& d) {
 	Node<T> *temp = d.GetHead();
 	while (temp != NULL) {
-		this->AppendElement(temp->GetData());
+		this->AppendElement(*temp->GetData());
 		temp = temp->GetNext();
 	}
 }
@@ -89,7 +89,7 @@ template <class T>
 bool DLinkedList<T>::RemoveElement(T element){
 	Node<T>*temp = this->head;
 	while(temp!=NULL){
-		if(temp->GetData()==element){
+		if(*temp->GetData()==element){
 			if(temp==head){
 				Node<T>*holder = temp->GetNext();
 				delete temp;

@@ -13,6 +13,7 @@ int main(){
 	UserNetwork * netWork = new UserNetwork();
 	string command="";
 	string userName = "", password = "", birthsday = "";
+	string author = "", time = "", contents = "";
 	User * currentUser = NULL;
 	netWork->ReadFromFile("NetworkData.txt");
 
@@ -38,12 +39,17 @@ int main(){
 		while (birthsday.length() != 10 || birthsday[2] != '/' || birthsday[5] != '/' || !isdigit(birthsday[0]) || !isdigit(birthsday[1])
 			|| !isdigit(birthsday[3]) || !isdigit(birthsday[4]) || !isdigit(birthsday[6]) || !isdigit(birthsday[7]) || !isdigit(birthsday[8])
 			|| !isdigit(birthsday[9])) {
-			cout << "birthday format is wrong, it should be mm/dd/yyyy. Please Enter Again. (Enter Q to quit): \n";
+			cout << "birthday format is wrong, it should be mm/dd/yyyy. Please Enter Again. (Enter Q to quit, B to main menu): \n";
 			cin >> birthsday;
+			if (birthsday == "Q" || birthsday == "q")
+				goto exit;
+			if (birthsday == "B" || birthsday == "b")
+				goto menu;
 		}
 
 		netWork->AddUser(User(userName, password, birthsday));
 		cout << "You have succesefully create your account\n";
+		netWork->SaveInFile("NetworkData.txt");
 
 		cout<<netWork->print();
 		goto menu;
@@ -79,15 +85,29 @@ int main(){
 		cout << "Current user is " << currentUser->GetUserName() << endl;
 
 		currentMenu:
-		cout << "To display your Wall, Enter D. Enter Q to quit\n";
+		cout << "To display your Wall, Enter D. To add a Wallpost to your wall, Enter A.  Enter Q to quit\n";
 		cin >> command;
-		while (toupper(command[0]) == 'D'&& toupper(command[0]) == 'Q') {
+		while (toupper(command[0]) == 'D'&& toupper(command[0]) == 'Q'&&toupper(command[0]!='A')) {
 			cout << "Command invalid. Please try again:\n";
 			cin >> command;
 		}
 		
 		if (toupper(command[0]) == 'D') {
 			cout << currentUser->Print();
+			goto currentMenu;
+		}
+
+		if (toupper(command[0]) == 'A') {
+			cout << "Enter Author's Name: \n";
+			cin >> author;
+			cout << "Enter the time Posted: \n";
+			cin >> time;
+			cin.ignore();
+			cout << "Enter your contents here: \n";
+			getline(cin, contents);
+			currentUser->AddPost(WallPost(contents, time, author));
+			cout << "Your Post has been added to the wall\n";
+			netWork->SaveInFile("NetworkData.txt");
 			goto currentMenu;
 		}
 		if (toupper(command[0]) == 'Q')
