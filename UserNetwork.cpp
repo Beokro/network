@@ -27,6 +27,7 @@ bool UserNetwork::CheckUserName(string userName) {
 	return false;
 }
 
+
 bool UserNetwork::AddUser(User user){
 	if (CheckUserName(user.GetUserName()))
 		return false;
@@ -198,6 +199,7 @@ void UserNetwork::ReadFromFile(string filename){
 	}
 	if (u->GetUserName() != "stub") {
 		AddUser(*u);
+
 	}
 
 

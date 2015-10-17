@@ -16,7 +16,7 @@ int main(){
 	string author = "", time = "", contents = "";
 	User * currentUser = NULL;
 	cout<<"everthing before save is fine";
-	//netWork->ReadFromFile("NetworkData.txt");
+	netWork->ReadFromFile("NetworkData.txt");
 
 	//cout<<netWork->print(); 
 
