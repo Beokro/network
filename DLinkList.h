@@ -10,7 +10,7 @@ private:
 	Node<T>* prev;
 	T *data;
 public:
-	Node(T d) : data(new T(d)), next(NULL), prev(NULL) {};
+	Node(T d) : next(NULL), prev(NULL),data(new T(d)) {};
 	Node<T> * GetNext() {return this->next;};
 	Node<T> * GetPrev() {return this->prev;};
 	void   SetNext(Node * n) {this->next = n;}
@@ -64,6 +64,8 @@ DLinkedList<T>::DLinkedList() {
 
 template <class T>
 DLinkedList<T>::DLinkedList(const DLinkedList<T>& d) {
+	head = NULL;
+	tail = NULL;
 	Node<T> *temp = d.GetHead();
 	while (temp != NULL) {
 		this->AppendElement(*temp->GetData());

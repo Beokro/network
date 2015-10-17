@@ -15,7 +15,7 @@ int main(){
 	string userName = "", password = "", birthsday = "";
 	string author = "", time = "", contents = "";
 	User * currentUser = NULL;
-	cout<<"everthing before save is fine";
+	cout<<"everthing before save is fine\n";
 	netWork->ReadFromFile("NetworkData.txt");
 
 	//cout<<netWork->print(); 
@@ -116,6 +116,7 @@ int main(){
 	}
 
 	exit:
+	delete netWork;
 
 
 	return 0;

@@ -199,7 +199,7 @@ void UserNetwork::ReadFromFile(string filename){
 	}
 	if (u->GetUserName() != "stub") {
 		AddUser(*u);
-
+		delete u;
 	}
 
 
